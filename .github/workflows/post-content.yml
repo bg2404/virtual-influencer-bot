@@ -36,20 +36,20 @@ jobs:
       - name: Run the script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_API_URL: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_BASE_URL: ${{ secrets.GEMINI_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          OPENAI_API_URL: ${{ secrets.GEMINI_API_KEY }}
-          OPENAI_BASE_URL: ${{ secrets.GEMINI_API_KEY }}
-          X_USERNAME: ${{ secrets.GEMINI_API_KEY }}
-          X_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          X_API_KEY_SECRET: ${{ secrets.GEMINI_API_KEY }}
-          X_ACCESS_TOKEN: ${{ secrets.GEMINI_API_KEY }}
-          X_ACCESS_TOKEN_SECRET: ${{ secrets.GEMINI_API_KEY }}
-          X_CLIENT_ID: ${{ secrets.GEMINI_API_KEY }}
-          X_CLIENT_SECRET: ${{ secrets.GEMINI_API_KEY }}
-          SUPABASE_URL: ${{ secrets.GEMINI_API_KEY }}
-          SUPABASE_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_URL: ${{ secrets.GEMINI_API_URL }}
+          GEMINI_BASE_URL: ${{ secrets.GEMINI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_URL: ${{ secrets.OPENAI_API_URL }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          X_USERNAME: ${{ secrets.X_USERNAME }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_KEY_SECRET: ${{ secrets.X_API_KEY_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          X_CLIENT_ID: ${{ secrets.X_CLIENT_ID }}
+          X_CLIENT_SECRET: ${{ secrets.X_CLIENT_SECRET }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           MODEL: ${{ secrets.MODEL }}
           PERSONALITY: ${{ secrets.PERSONALITY }}
           CONTENT_TYPE: ${{ secrets.CONTENT_TYPE }}
