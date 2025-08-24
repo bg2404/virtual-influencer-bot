@@ -1,9 +1,6 @@
 import argparse
 import logging
 import os
-from xml.etree.ElementInclude import include
-
-from annotated_types import T
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
@@ -95,7 +92,6 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        required=True,
         default=os.environ.get("MODEL", "gemini-2.5-pro"),
         choices=model_names,
         help="The model to use for generation.",
@@ -103,7 +99,6 @@ def main():
     parser.add_argument(
         "--personality",
         type=str,
-        required=True,
         default=os.environ.get("PERSONALITY", "The Enthusiastic Optimist"),
         choices=personalities,
         help="The personality for the tweet.",
@@ -111,7 +106,6 @@ def main():
     parser.add_argument(
         "--content-type",
         type=str,
-        required=True,
         default=os.environ.get("CONTENT_TYPE", "Informative Snippets and Facts"),
         choices=content_types,
         help="The type of content for the tweet.",
