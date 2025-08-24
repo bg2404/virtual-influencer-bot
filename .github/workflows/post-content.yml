@@ -1,0 +1,60 @@
+name: Generate and Post Content
+
+on:
+  schedule:
+    # Runs every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allows you to run it manually from the Actions tab
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+
+      - name: Set up cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-interaction --no-root
+
+      - name: Run the script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_URL: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_BASE_URL: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_URL: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.GEMINI_API_KEY }}
+          X_USERNAME: ${{ secrets.GEMINI_API_KEY }}
+          X_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          X_API_KEY_SECRET: ${{ secrets.GEMINI_API_KEY }}
+          X_ACCESS_TOKEN: ${{ secrets.GEMINI_API_KEY }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.GEMINI_API_KEY }}
+          X_CLIENT_ID: ${{ secrets.GEMINI_API_KEY }}
+          X_CLIENT_SECRET: ${{ secrets.GEMINI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.GEMINI_API_KEY }}
+          SUPABASE_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MODEL: ${{ secrets.MODEL }}
+          PERSONALITY: ${{ secrets.PERSONALITY }}
+          CONTENT_TYPE: ${{ secrets.CONTENT_TYPE }}
+          INCLUDE_HASHTAGS: ${{ secrets.INCLUDE_HASHTAGS }}
+          INCLUDE_EMOJIS: ${{ secrets.INCLUDE_EMOJIS }}
+          POST: ${{ secrets.POST }}
+        run: |
+          poetry run python3 main.py

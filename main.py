@@ -1,5 +1,9 @@
 import argparse
 import logging
+import os
+from xml.etree.ElementInclude import include
+
+from annotated_types import T
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
@@ -92,6 +96,7 @@ def main():
         "--model",
         type=str,
         required=True,
+        default=os.environ.get("MODEL", "gemini-2.5-pro"),
         choices=model_names,
         help="The model to use for generation.",
     )
@@ -99,6 +104,7 @@ def main():
         "--personality",
         type=str,
         required=True,
+        default=os.environ.get("PERSONALITY", "The Enthusiastic Optimist"),
         choices=personalities,
         help="The personality for the tweet.",
     )
@@ -106,27 +112,31 @@ def main():
         "--content-type",
         type=str,
         required=True,
+        default=os.environ.get("CONTENT_TYPE", "Informative Snippets and Facts"),
         choices=content_types,
         help="The type of content for the tweet.",
     )
+    include_hashtags_env = os.environ.get("INCLUDE_HASHTAGS", "True").lower() == "true"
     parser.add_argument(
-        "--no-hashtags",
-        action="store_false",
-        dest="include_hashtags",
-        help="Disable hashtags in the tweet.",
+        "--include-hashtags",
+        action="store_true",
+        default=include_hashtags_env,
+        help="Include hashtags in the tweet.",
     )
+    include_emojis_env = os.environ.get("INCLUDE_EMOJIS", "True").lower() == "true"
     parser.add_argument(
-        "--no-emojis",
-        action="store_false",
-        dest="include_emojis",
-        help="Disable emojis in the tweet.",
+        "--include-emojis",
+        action="store_true",
+        default=include_emojis_env,
+        help="Include emojis in the tweet.",
     )
+    post_env = os.environ.get("POST", "False").lower() == "true"
     parser.add_argument(
         "--post",
         action="store_true",
+        default=post_env,
         help="Post the generated tweet to X. If not set, prints to console only.",
     )
-    parser.set_defaults(include_hashtags=True, include_emojis=True)
     args = parser.parse_args()
 
     # Get API configuration for the selected model
